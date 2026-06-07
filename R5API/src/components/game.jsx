@@ -30,21 +30,25 @@ function Game() {
     const handleAnswer = (answer) => {
         const hasSeenBreed = seenBreeds.includes(breed);
 
-        if (
-            (answer === "yes" && hasSeenBreed) || 
-            (answer === "no" && !hasSeenBreed)
-             
-            ) {
-
+        if  (answer === "yes" && hasSeenBreed) 
+             {
             setScore(score + 1);
             setMessage("Have seen this breed!");
-        } else {
+        } 
+        
+        else if (answer === "no" && !hasSeenBreed) {
+             setMessage("Have never seen this breed!");
+        }
+        else if (answer === "yes" && !hasSeenBreed) {
             setMessage("Have never seen this breed!");
+        } else if (answer === "no" && hasSeenBreed) {
+            setMessage("Have seen this breed!");
         }
-
         if (!hasSeenBreed) {
-            setSeenBreeds ((prev) => [...prev, breed]);
+            setSeenBreeds((prev) => [...prev, breed]);
         }
+            
+            
 
         setTimeout(() => {
             fetchDog();
@@ -70,6 +74,7 @@ function Game() {
             <h3>{message}</h3>
 
             <p>Seen Breeds: {seenBreeds.length}</p>
+            <p>Unseen Breeds: {totalShown - seenBreeds.length}</p>
         </div>
     );
 }
