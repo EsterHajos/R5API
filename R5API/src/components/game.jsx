@@ -7,6 +7,8 @@ function Game() {
     const [score, setScore] = useState(0);
     const [seenBreeds, setSeenBreeds] = useState([]);
     const [message, setMessage] = useState("");
+    const [totalShown, setTotalShown] = useState(0);
+
     const fetchDog = async () => {
         try {
             const response = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -32,7 +34,7 @@ function Game() {
 
         if  (answer === "yes" && hasSeenBreed) 
              {
-            setScore(score + 1);
+            setScore((prev) => prev + 1);
             setMessage("Have seen this breed!");
         } 
         
@@ -55,6 +57,9 @@ function Game() {
             setMessage("");
         }, 1200);
     };
+
+    const unseenCount = Math.max(0, seenBreeds.length > 0 ? seenBreeds.length : 0);
+
     return (
         <div className="game-container">
             <h1>Have you seen this breed?</h1>
