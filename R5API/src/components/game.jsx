@@ -11,7 +11,7 @@ function Game() {
     const [gameOver, setGameOver] = useState(false);
 
     const TOTAL_ROUNDS = 20;
-    
+
 
     const fetchDog = async () => {
         try {
@@ -24,38 +24,50 @@ function Game() {
             const parts = data.message.split("/");
             const breedPart = parts[4];
             const breedName = breedPart.split("-")[0];
-            setBreed(breedName);
-            setTotalShown((prev) => prev + 1);
-        } catch (error) {
-            console.error("error");
-        }
+            setBreed(breedName);§
     };
+
     useEffect(() => {
         fetchDog();
     }, []);
 
     const handleAnswer = (answer) => {
+        if (gameOver) return;
+
         const hasSeenBreed = seenBreeds.includes(breed);
 
         if  (answer === "yes")  
              {
             setScore((prev) => prev + 1);
             if (!hasSeenBreed) {
+                setSeenBreeds((prev) => [...prev, breed]);
+            }
                 setMessage("You have seen this breed!");
             
         } 
         
-        else if (answer === "no") {
+        else {
              setMessage("You have never seen this breed!");
+        }
+
+        const nextRound = round + 1;
+        setRound(nextRound);
+        if (nextRound >= TOTAL_ROUNDS) {
+            setGameOver(true);
+            return;
         }
         
         setTimeout(() => {
             fetchDog();
             setMessage("");
-        }, 1200);
+        }, 800);
     };
 
-    const unseenCount = Math.max(0, seenBreeds.length > 0 ? seenBreeds.length : 0);
+    const getResultText = () => {
+        if (score >= 15) return "Dog Expert!";
+        if (score >= 10) return "Dog Friend!";
+        return "Dog Newbie!";
+    };
 
     return (
         <div className="game-container">
