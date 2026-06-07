@@ -7,7 +7,11 @@ function Game() {
     const [score, setScore] = useState(0);
     const [seenBreeds, setSeenBreeds] = useState([]);
     const [message, setMessage] = useState("");
-    const [totalShown, setTotalShown] = useState(0);
+    const [round, setRound] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
+
+    const TOTAL_ROUNDS = 20;
+    
 
     const fetchDog = async () => {
         try {
@@ -33,26 +37,18 @@ function Game() {
     const handleAnswer = (answer) => {
         const hasSeenBreed = seenBreeds.includes(breed);
 
-        if  (answer === "yes" && hasSeenBreed) 
+        if  (answer === "yes")  
              {
             setScore((prev) => prev + 1);
-            setMessage("You have seen this breed!");
+            if (!hasSeenBreed) {
+                setMessage("You have seen this breed!");
+            
         } 
         
-        else if (answer === "no" && !hasSeenBreed) {
+        else if (answer === "no") {
              setMessage("You have never seen this breed!");
         }
-        else if (answer === "yes" && !hasSeenBreed) {
-            setMessage("You have never seen this breed!");
-        } else if (answer === "no" && hasSeenBreed) {
-            setMessage("You have seen this breed!");
-        }
-        if (!hasSeenBreed) {
-            setSeenBreeds((prev) => [...prev, breed]);
-        }
-            
-            
-
+        
         setTimeout(() => {
             fetchDog();
             setMessage("");
