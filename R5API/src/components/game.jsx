@@ -62,3 +62,13 @@ function Game() {
             <button onClick={() => handleAnswer("yes")} className="yes-button">Yes</button>
             <button onClick={() => handleAnswer("no")} className="no-button">No</button>
         </div>
+
+
+            <h3>{message}</h3>
+
+            <p>Seen Breeds: {seenBreeds.length(", ")}</p>
+        </div>
+    );
+}
+
+export default Game;
