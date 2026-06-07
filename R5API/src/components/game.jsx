@@ -43,4 +43,22 @@ function Game() {
             setSeenBreeds ((prev) => [...prevBreeds, breed]);
         }
 
-        
+        setTimeout(() => {
+            fetchDog();
+            setMessage("");
+        }, 1200);
+    };
+    return (
+        <div className="game-container">
+            <h1>Have you seen this breed?</h1>
+
+            <h2>Score: {score}</h2>
+
+            {dogImg && (
+        <img src={dogImg} alt="Random Dog" className="dog-image" />)}
+        <p>Have you seen this dog breed before?</p>
+
+        <div className="button-container">
+            <button onClick={() => handleAnswer("yes")} className="yes-button">Yes</button>
+            <button onClick={() => handleAnswer("no")} className="no-button">No</button>
+        </div>
