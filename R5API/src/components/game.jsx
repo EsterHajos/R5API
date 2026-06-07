@@ -21,6 +21,7 @@ function Game() {
             const breedPart = parts[4];
             const breedName = breedPart.split("-")[0];
             setBreed(breedName);
+            setTotalShown((prev) => prev + 1);
         } catch (error) {
             console.error("error");
         }
@@ -35,16 +36,16 @@ function Game() {
         if  (answer === "yes" && hasSeenBreed) 
              {
             setScore((prev) => prev + 1);
-            setMessage("Have seen this breed!");
+            setMessage("You have seen this breed!");
         } 
         
         else if (answer === "no" && !hasSeenBreed) {
-             setMessage("Have never seen this breed!");
+             setMessage("You have never seen this breed!");
         }
         else if (answer === "yes" && !hasSeenBreed) {
-            setMessage("Have never seen this breed!");
+            setMessage("You have never seen this breed!");
         } else if (answer === "no" && hasSeenBreed) {
-            setMessage("Have seen this breed!");
+            setMessage("You have seen this breed!");
         }
         if (!hasSeenBreed) {
             setSeenBreeds((prev) => [...prev, breed]);
