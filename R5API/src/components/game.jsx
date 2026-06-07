@@ -14,3 +14,33 @@ function Game() {
             const data = await response.json();
 
             setDogImg(data.message);
+
+            const parts = data.message.split("/");
+            const breedPart = parts[4];
+            const breedName = breedPart.split("-")[0];
+            setBreed(breedName);
+        } catch (error) {
+            console.error("error");
+        }
+    };
+    useEffect(() => {
+        fetchDog();
+    }, []);
+
+    const handleAnswer = (answer) => {
+        const hasSeenBreed = seenBreeds.includes(breed);
+        if (answer === "yes" && hasSeenBreed) || 
+            (answer === "no" && !hasSeenBreed)
+             {
+
+            setScore(score + 1);
+            setMessage("Have seen this breed!");
+        } else {
+            setMessage("Have never seen this breed!");
+        }
+
+        if (!hasSeenBreed) {
+            setSeenBreeds ((prev) => [...prevBreeds, breed]);
+        }
+
+        
