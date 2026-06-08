@@ -13,14 +13,9 @@ return (
   <Route path="/login" element={<Login />} />
   <Route path="/game" element={<Game />} />
   </Routes>
-  
-  
   </BrowserRouter>
-
-
-)
-
-
-
+);
 
 }
+
+export default App;
