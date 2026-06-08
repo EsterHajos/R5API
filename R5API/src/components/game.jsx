@@ -12,6 +12,8 @@ function Game() {
 
     const TOTAL_ROUNDS = 20;
 
+    const roundsLeft = TOTAL_ROUNDS -round;
+
 
     const fetchDog = async () => {
         try {
@@ -61,9 +63,9 @@ function Game() {
     };
 
     const getResultText = () => {
-        if (score >= 15) { return "Dog Expert!";}
-        if (score >= 10) {return "Dog Friend!";}
-        return "Dog Newbie!";
+        if (score >= 15) { return "You are a Dog Expert!";}
+        if (score >= 10) {return "You are a Dog Friend!";}
+        return "You are a Dog Newbie!";
     };
 
     return (
@@ -71,12 +73,13 @@ function Game() {
             <h1>Have you seen this breed?</h1>
 
             <h2>Score: {score}/{TOTAL_ROUNDS}</h2>
+            <h3>Rounds left: {roundsLeft}</h3>
 
             {!gameOver && (
                 <>
                 {dogImg && (
         
-        <img src={dogImg} alt="Random Dog" className="dog-image" />)}
+        <img src={dogImg} alt="Random Dog" className="dog-image" />
             
         )}
  
