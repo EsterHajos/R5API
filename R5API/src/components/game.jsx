@@ -29,6 +29,7 @@ function Game() {
     } catch (error) {
     console.error(error);
     }
+};
 
     useEffect(() => {
         fetchDog();
@@ -37,20 +38,13 @@ function Game() {
     const handleAnswer = (answer) => {
         if (gameOver) return;
 
-        const hasSeenBreed = seenBreeds.includes(breed);
 
         if  (answer === "yes")  
              {
             setScore((prev) => prev + 1);
-            if (!hasSeenBreed) {
-                setSeenBreeds((prev) => [...prev, breed]);
-            }
-                setMessage("You have seen this breed!");
-            
-        } 
-        
-        else {
-             setMessage("You have never seen this breed!");
+            setMessage("You have seen this breed!");
+             } else { 
+            setMessage("You have never seen this breed!");
         }
 
         const nextRound = round + 1;
@@ -67,8 +61,8 @@ function Game() {
     };
 
     const getResultText = () => {
-        if (score >= 15) return "Dog Expert!";
-        if (score >= 10) return "Dog Friend!";
+        if (score >= 15) { return "Dog Expert!";}
+        if (score >= 10) {return "Dog Friend!";}
         return "Dog Newbie!";
     };
 
@@ -78,14 +72,16 @@ function Game() {
 
             <h2>Score: {score}/{TOTAL_ROUNDS}</h2>
 
-            {dogImg && !gameOver && (
-
+            {!gameOver && (
+                <>
+                {dogImg && (
+        
         <img src={dogImg} alt="Random Dog" className="dog-image" />)}
-
-            {gameOver && (
             
+        )}
+ 
         <p>Have you seen this dog breed before?</p>
-                < >
+            
 
         <div className="button-container">
             <button onClick={() => handleAnswer("yes")} className="yes-button">Yes</button>
@@ -93,10 +89,11 @@ function Game() {
         </div>
 
             <h3>{message}</h3>
-
             </>
 
-            {!gameOver && (
+    )}
+
+            {gameOver && (
                 <div>
                 <h2> End Of Game</h2>
                 <h3> You have seen {score} / {TOTAL_ROUNDS} breeds</h3>
@@ -108,17 +105,4 @@ function Game() {
         );
     }
                 
-                
-                </div>
-
-
-            )
-
-
-
-            }
-
-    );
-}
-
 export default Game;
