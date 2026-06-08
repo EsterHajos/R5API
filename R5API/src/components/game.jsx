@@ -59,7 +59,7 @@ function Game() {
         setTimeout(() => {
             fetchDog();
             setMessage("");
-        }, 800);
+        }, 1500);
     };
 
     const getResultText = () => {
