@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
+function Login() {
+const [username, setUsername] = useState ("");
 const [password, setPassword] = useState ("");
 
 const navigate = useNavigate();
@@ -18,6 +19,8 @@ const handleLogin = () => {
         } else {
             alert("Wrong username or password");
         }
+
+};
 
     return (
         <div>
