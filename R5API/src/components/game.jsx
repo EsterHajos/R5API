@@ -24,8 +24,11 @@ function Game() {
             const parts = data.message.split("/");
             const breedPart = parts[4];
             const breedName = breedPart.split("-")[0];
-            setBreed(breedName);§
-    };
+           
+            setBreed(breedName);
+    } catch (error) {
+    console.error(error);
+    }
 
     useEffect(() => {
         fetchDog();
@@ -73,23 +76,48 @@ function Game() {
         <div className="game-container">
             <h1>Have you seen this breed?</h1>
 
-            <h2>Score: {score}</h2>
+            <h2>Score: {score}/{TOTAL_ROUNDS}</h2>
 
-            {dogImg && (
+            {dogImg && !gameOver && (
+
         <img src={dogImg} alt="Random Dog" className="dog-image" />)}
+
+            {gameOver && (
+            
         <p>Have you seen this dog breed before?</p>
+                < >
 
         <div className="button-container">
             <button onClick={() => handleAnswer("yes")} className="yes-button">Yes</button>
             <button onClick={() => handleAnswer("no")} className="no-button">No</button>
         </div>
 
-
             <h3>{message}</h3>
 
-            <p>Seen Breeds: {seenBreeds.length}</p>
-            <p>Unseen Breeds: {totalShown - seenBreeds.length}</p>
-        </div>
+            </>
+
+            {!gameOver && (
+                <div>
+                <h2> End Of Game</h2>
+                <h3> You have seen {score} / {TOTAL_ROUNDS} breeds</h3>
+                <p>{getResultText()}</p>
+                </div>
+
+            )} 
+            </div>
+        );
+    }
+                
+                
+                </div>
+
+
+            )
+
+
+
+            }
+
     );
 }
 
